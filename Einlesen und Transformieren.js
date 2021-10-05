@@ -7,7 +7,7 @@ var durchmesserPunkte = 0.1;
 var containerID = "e1c9b76d-a623-423e-b98b-630647948f0c";
 
 //inhalt der textdatei einlesen
-var lineList = desiteAPI.readTextFile(desiteAPI.getProjectDirectory() + '/p3.txt');
+var lineList = desiteAPI.readTextFile(desiteAPI.getProjectDirectory() + '/punkte-testdaten.txt');
 
 desiteAPI.startProjectTransaction()
 {
@@ -52,37 +52,37 @@ desiteAPI.startProjectTransaction()
 desiteAPI.endProjectTransaction(); //hier wurden die Punkte erfolgreich als Objekte eingelesen
 
 
-//Diese beiden Punkte werden später direkt aus dem Modell gelesen. In dem Tag (Input-Datei) steht, bei welchem Objekt der Punkt aufgenommen wurde
+//Diese beiden Punkte werden spï¿½ter direkt aus dem Modell gelesen. In dem Tag (Input-Datei) steht, bei welchem Objekt der Punkt aufgenommen wurde
 
 //startpunkt, aus dem Modell lesen ->getPropertyValue BBox
 var startPoint = {x: -5.326210, y:-74.40756};
 //soll, aus dem Modell lesen ->getPropertyValue BBox
 var refPoint = {x: -17.202351, y:-37.292046};
 
-//virtuell verschieben für die Berechnung des Winkels
+//virtuell verschieben fï¿½r die Berechnung des Winkels
 refPoint.x -= startPoint.x;
 refPoint.y -= startPoint.y;
 
-//punkt aus der input-Datei, der mit dem ref2 punkt übereinstimmen soll -> diese Verknüpfung wird später über einen Tag in der Input-Datei hergestellt
+//punkt aus der input-Datei, der mit dem ref2 punkt ï¿½bereinstimmen soll -> diese Verknï¿½pfung wird spï¿½ter ï¿½ber einen Tag in der Input-Datei hergestellt
 var p59 = {x: 4.54, y: 38.26};
 
 //berechnung des drehwinkels
 var angleRef = Math.atan(refPoint.x/refPoint.y) * (180 /Math.PI);
 var angleIPoint = Math.atan(p59.x/p59.y) * (180 /Math.PI);
 
-//berechnung für negative winkel anpassen
+//berechnung fï¿½r negative winkel anpassen
 
-//winkel, um den die punkte gedreht werden müssen
+//winkel, um den die punkte gedreht werden mï¿½ssen
 var rotateAngle = Math.abs(angleRef) + Math.abs(angleIPoint);
 
 if( angleRef < 0 || angleIPoint < 0 ){
 	rotateAngle *= -1;
 }
 
-//für die rotation über die api muss ich den winkel nochmal in rad umrechnen
+//fï¿½r die rotation ï¿½ber die api muss ich den winkel nochmal in rad umrechnen
 var drehungRad = rotateAngle * (Math.PI/180);
 
-//einstellungen für die 3x3 Rotationsmatrix (siehe Desite Dokumentation)
+//einstellungen fï¿½r die 3x3 Rotationsmatrix (siehe Desite Dokumentation)
 var trans = '<t>' + 
 '	<scale sx="1.0" sy="1.0" sz="1.0" />' +
 	'<translate dx="0" dy="0" dz="0" />' +
@@ -93,7 +93,7 @@ var trans = '<t>' +
 //alle Punkte aus dem Container in einer Liste speichern
 var pList = desiteAPI.getContainedElements("e1c9b76d-a623-423e-b98b-630647948f0c",0,false);
 
-//schleife über alle Punkte
+//schleife ï¿½ber alle Punkte
 for( var i = 0; i < pList.length; ++i){
 	//id des aktuellen Objektes
 	var objID = pList[i];
@@ -101,11 +101,11 @@ for( var i = 0; i < pList.length; ++i){
 	desiteAPI.transformObject(objID,trans);
 }
 
-//Angabe für die Translation. Der Startpunkt dient hier als Referenz, da wir die Position in dem Modell bekannt ist
+//Angabe fï¿½r die Translation. Der Startpunkt dient hier als Referenz, da wir die Position in dem Modell bekannt ist
 trans = '<t>' +
 	'<translate dx="' + startPoint.x + '" dy="' + startPoint.y + '" dz="0.0" /></t>'
 
-//weitere schleife über alle Punkte
+//weitere schleife ï¿½ber alle Punkte
 for( var i = 0; i < pList.length; ++i){
 	//id des aktuellen Objektes
 	var objID = pList[i];
