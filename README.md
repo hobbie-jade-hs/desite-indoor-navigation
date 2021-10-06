@@ -48,3 +48,6 @@ var strRaumName = desiteAPI.getPropertyValue(desiteRight.ID(),"bs:SectionName","
 //den raumnamen in dem punkt aktualisieren
 desiteAPI.setPropertyValue(desiteLeft.ID(),"Raum","xs:string",strRaumName);
 ```
+
+## Bilder zuordnen (assignImages.js)
+Während der Begehung werden Bilder gemacht, deren Aufnahmezeit in die Dateinamen der Bilder geschrieben wird. Über den Timestamp der Punktobjekte können die Bilder als Attribute an die Punkte angehängt werden. Als Attribut wird der Pfad des Bildes verwendet.
