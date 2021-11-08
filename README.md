@@ -1,4 +1,4 @@
-# Indoor Navigation mit Desite
+# Interaktion zwischen einem Gebäudedatenmodell und einer verorteten Gebäudebegehung
 
 Die Daten des Trackers liegen als Textdatei (punkte-testdaten.txt) vor. Diese Datei muss in dem Ordner des dazugehörigen Desite-Projektes gespeichert werden.
 ![Daten des Trackers](./doc/img/tracker-daten.jpg)
